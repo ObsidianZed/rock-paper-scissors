@@ -11,9 +11,7 @@ let playerScore = 0;
 let computerScore = 0;
 
 
-
 function computerPlay() {
-    // return random selection of rock, paper, or scissors
     const choice = choices[Math.floor(Math.random()*choices.length)];
     return choice;
 };
@@ -23,19 +21,17 @@ function playRound(playerSelection,computerSelection) {
         case 'rock':
                 switch(computerSelection) {
                     case 'rock':
-                        return tie;
+                        console.log(tie + "\n" + playerScore + " vs " + computerScore);
                         break;
         
                     case 'paper':
-                        return youLose.concat(paperWin);
                         computerScore++;
-                        console.log(playerScore + " vs " + computerScore);
+                        console.log(youLose.concat(paperWin) + "\n" + playerScore + " vs " + computerScore);
                         break;
 
                     case 'scissors':
-                        return youWin.concat(rockWin);
                         playerScore++;
-                        console.log(playerScore + " vs " + computerScore);
+                        console.log(youWin.concat(rockWin) + "\n" + playerScore + " vs " + computerScore);
                         break;
                 }
             break;
@@ -43,19 +39,17 @@ function playRound(playerSelection,computerSelection) {
         case 'paper':
                 switch(computerSelection) {
                     case 'rock':
-                        return youWin.concat(paperWin);
                         playerScore++;
-                        console.log(playerScore + " vs " + computerScore);
+                        console.log(youWin.concat(paperWin) + "\n" + playerScore + " vs " + computerScore);
                         break;
         
                     case 'paper':
-                        return tie;
+                        console.log(tie + "\n" + playerScore + " vs " + computerScore);
                         break;
 
                     case 'scissors':
-                        return youLose.concat(scissorsWin);
                         computerScore++;
-                        console.log(playerScore + " vs " + computerScore);
+                        console.log(youLose.concat(scissorsWin) + "\n" + playerScore + " vs " + computerScore);
                         break;
                 }
             break;
@@ -63,19 +57,17 @@ function playRound(playerSelection,computerSelection) {
         case 'scissors':
                 switch(computerSelection) {
                     case 'rock':
-                        return youLose.concat(rockWin);
                         computerScore++;
-                        console.log(playerScore + " vs " + computerScore);
+                        console.log(youLose.concat(rockWin) + "\n" + playerScore + " vs " + computerScore);
                         break;
         
                     case 'paper':
-                        return youWin.concat(scissorsWin);
                         playerScore++;
-                        console.log(playerScore + " vs " + computerScore);
+                        console.log(youWin.concat(scissorsWin) + "\n" + playerScore + " vs " + computerScore);
                         break;
 
                     case 'scissors':
-                        return tie;
+                        console.log(tie + "\n" + playerScore + " vs " + computerScore);
                         break;
                 }
             break;
@@ -92,13 +84,33 @@ function game(rounds) {
     for (i=0;i<rounds;i++){
         console.log("Round " + (1+i))
 
-        const playerSelection = prompt("Make a choice between Rock, Paper, and Scissors", "Rock").toLowerCase();
+        let playerSelection = prompt("Make a choice between Rock, Paper, and Scissors", "Rock");
         const computerSelection = computerPlay();
 
-        console.log(playRound(playerSelection, computerSelection));
+        if (playerSelection != null) {
+            playerSelection = playerSelection.toLowerCase();
+            console.log(playRound(playerSelection, computerSelection));
+        } else {
+            playerSelection = prompt("Please enter a valid choice.");
+            if (playerSelection == null) {
+                return "You have decided not to play."
+            } else {
+                playerSelection = playerSelection.toLowerCase();
+                console.log(playRound(playerSelection, computerSelection));
+            }
+        }
+
     }
     
-    console.log("Final Score");
+    if (playerScore > computerScore) {
+        return "You won THE GAME!";
+    } else if (computerScore > playerScore) {
+        return "You lost THE GAME!";
+    } else {
+        return "THE GAME was inconclusive."
+    }
+
+    console.log("\nFinal Score");
     console.log("Player: " + playerScore);
     console.log("Computer: " + computerScore);
 
