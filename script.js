@@ -1,4 +1,3 @@
-console.log("Hello World!");
 
 const choices = ['rock', 'paper', 'scissors'];
 const youLose = "You lose! "
@@ -9,6 +8,8 @@ const rockWin = "Rock beats Scissors!"
 const scissorsWin = "Scissors beat Paper!"
 let playerScore = 0;
 let computerScore = 0;
+
+const gameResults = document.querySelector('div')
 
 
 function computerPlay() {
@@ -84,7 +85,7 @@ function game(rounds) {
     for (i=0;i<rounds;i++){
         console.log("Round " + (1+i))
 
-        let playerSelection = prompt("Make a choice between Rock, Paper, and Scissors", "Rock");
+        // let playerSelection = prompt("Make a choice between Rock, Paper, and Scissors", "Rock");
         const computerSelection = computerPlay();
 
         if (playerSelection != null) {
@@ -110,11 +111,10 @@ function game(rounds) {
         return "THE GAME was inconclusive."
     }
 
-    console.log("\nFinal Score");
-    console.log("Player: " + playerScore);
-    console.log("Computer: " + computerScore);
+    // console.log("\nFinal Score");
+    // console.log("Player: " + playerScore);
+    // console.log("Computer: " + computerScore);
 
 }
 
 // game(1);
-

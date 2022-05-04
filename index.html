@@ -5,10 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./script.js"></script>
+    <script src="./script.js" defer></script>
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    Hello. To play Rock, Paper, Scissors, please enter into the console game(num) where num = the number of rounds you would like to play.
+
+    <div id="container">
+
+        <button onclick="playRound('Rock', computerPlay())">Rock</button>
+        <button onclick="playRound('Paper', computerPlay())">Paper</button>
+        <button onclick="playRound('Scissors', computerPlay())">Scissors</button>
+
+    </div>
+
 </body>
 </html>
