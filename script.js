@@ -47,6 +47,7 @@ function initializeGame() {
     playerScore = 0;
     computerScore = 0;
     gameRound = 1;
+    // gameResults.innerHTML = `Round ${gameRound}: ${playerScore} to ${computerScore}<br>`;
 };
 
 function playRound(playerSelection,computerSelection) {
@@ -55,21 +56,26 @@ function playRound(playerSelection,computerSelection) {
         initializeGame();
     }
 
+    gameResults.innerHTML = `Round ${gameRound}: ${playerScore} to ${computerScore} <br>`;
+
     switch(playerSelection) {
         case 'rock':
                 switch(computerSelection) {
                     case 'rock':
                         console.log(tie + "\n" + playerScore + " vs " + computerScore);
+                        gameResults.innerHTML += tie;
                         break;
         
                     case 'paper':
                         computerScore++;
                         console.log(youLose.concat(paperWin) + "\n" + playerScore + " vs " + computerScore);
+                        gameResults.innerHTML += youLose + '<br>' + paperWin;
                         break;
 
                     case 'scissors':
                         playerScore++;
                         console.log(youWin.concat(rockWin) + "\n" + playerScore + " vs " + computerScore);
+                        gameResults.innerHTML += youWin + '<br>' + rockWin;
                         break;
                 }
             break;
@@ -79,15 +85,18 @@ function playRound(playerSelection,computerSelection) {
                     case 'rock':
                         playerScore++;
                         console.log(youWin.concat(paperWin) + "\n" + playerScore + " vs " + computerScore);
+                        gameResults.innerHTML += youWin + '<br>' + paperWin;
                         break;
         
                     case 'paper':
                         console.log(tie + "\n" + playerScore + " vs " + computerScore);
+                        gameResults.innerHTML += tie;
                         break;
 
                     case 'scissors':
                         computerScore++;
                         console.log(youLose.concat(scissorsWin) + "\n" + playerScore + " vs " + computerScore);
+                        gameResults.innerHTML += youLose + '<br>' + scissorsWin;
                         break;
                 }
             break;
@@ -97,15 +106,18 @@ function playRound(playerSelection,computerSelection) {
                     case 'rock':
                         computerScore++;
                         console.log(youLose.concat(rockWin) + "\n" + playerScore + " vs " + computerScore);
+                        gameResults.innerHTML += youLose + '<br>' + rockWin;
                         break;
         
                     case 'paper':
                         playerScore++;
                         console.log(youWin.concat(scissorsWin) + "\n" + playerScore + " vs " + computerScore);
+                        gameResults.innerHTML += youWin + '<br>' + scissorsWin;
                         break;
 
                     case 'scissors':
                         console.log(tie + "\n" + playerScore + " vs " + computerScore);
+                        gameResults.innerHTML += tie;
                         break;
                 }
             break;
@@ -113,8 +125,6 @@ function playRound(playerSelection,computerSelection) {
         default:
             return "Please enter a valid choice."
     }
-
-    gameResults.innerHTML = `Round ${gameRound}: ${playerScore} to ${computerScore}`;
 
     if(gameRound++ == 5) {
         if (playerScore > computerScore) {
@@ -125,6 +135,7 @@ function playRound(playerSelection,computerSelection) {
             gameResults.innerHTML = `THE GAME was inconclusive.<br>The Final Score was ${playerScore} to ${computerScore}`;
         }
         initializeGame();
+        gameResults.innerHTML += "<br>Click any button to start a new game."
     }
 
 };
