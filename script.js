@@ -56,7 +56,7 @@ function playRound(playerSelection,computerSelection) {
         initializeGame();
     }
 
-    gameResults.innerHTML = `Round ${gameRound}: ${playerScore} to ${computerScore} <br>`;
+    gameResults.innerHTML = `Round ${gameRound}<br>`;
 
     switch(playerSelection) {
         case 'rock':
@@ -67,13 +67,13 @@ function playRound(playerSelection,computerSelection) {
                         break;
         
                     case 'paper':
-                        computerScore++;
+                        ++computerScore;
                         console.log(youLose.concat(paperWin) + "\n" + playerScore + " vs " + computerScore);
                         gameResults.innerHTML += youLose + '<br>' + paperWin;
                         break;
 
                     case 'scissors':
-                        playerScore++;
+                        ++playerScore;
                         console.log(youWin.concat(rockWin) + "\n" + playerScore + " vs " + computerScore);
                         gameResults.innerHTML += youWin + '<br>' + rockWin;
                         break;
@@ -83,7 +83,7 @@ function playRound(playerSelection,computerSelection) {
         case 'paper':
                 switch(computerSelection) {
                     case 'rock':
-                        playerScore++;
+                        ++playerScore;
                         console.log(youWin.concat(paperWin) + "\n" + playerScore + " vs " + computerScore);
                         gameResults.innerHTML += youWin + '<br>' + paperWin;
                         break;
@@ -94,7 +94,7 @@ function playRound(playerSelection,computerSelection) {
                         break;
 
                     case 'scissors':
-                        computerScore++;
+                        ++computerScore;
                         console.log(youLose.concat(scissorsWin) + "\n" + playerScore + " vs " + computerScore);
                         gameResults.innerHTML += youLose + '<br>' + scissorsWin;
                         break;
@@ -104,13 +104,13 @@ function playRound(playerSelection,computerSelection) {
         case 'scissors':
                 switch(computerSelection) {
                     case 'rock':
-                        computerScore++;
+                        ++computerScore;
                         console.log(youLose.concat(rockWin) + "\n" + playerScore + " vs " + computerScore);
                         gameResults.innerHTML += youLose + '<br>' + rockWin;
                         break;
         
                     case 'paper':
-                        playerScore++;
+                        ++playerScore;
                         console.log(youWin.concat(scissorsWin) + "\n" + playerScore + " vs " + computerScore);
                         gameResults.innerHTML += youWin + '<br>' + scissorsWin;
                         break;
@@ -126,7 +126,10 @@ function playRound(playerSelection,computerSelection) {
             return "Please enter a valid choice."
     }
 
-    if(gameRound++ == 5) {
+    gameRound++;
+    gameResults.innerHTML +=  `<br> Score: ${playerScore} to ${computerScore}`;
+
+    if(playerScore == 5 || computerScore == 5) {
         if (playerScore > computerScore) {
             gameResults.innerHTML = `You won THE GAME!<br>The Final Score was ${playerScore} to ${computerScore}`;
         } else if (computerScore > playerScore) {
