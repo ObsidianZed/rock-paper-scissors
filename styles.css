@@ -1,11 +1,13 @@
 * {
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
 body,
 #container {
     display: flex;
+    flex-flow: column;
     justify-content: center;
     align-items: center;
     padding: 10px;
@@ -15,3 +17,4 @@ body,
 button {
     height: 20px;
 }
+

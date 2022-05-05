@@ -8,16 +8,53 @@ const rockWin = "Rock beats Scissors!"
 const scissorsWin = "Scissors beat Paper!"
 let playerScore = 0;
 let computerScore = 0;
+let gameRound = 1;
 
-const gameResults = document.querySelector('div')
+const container = document.querySelector('#container');
+const gameResults = document.createElement('div');
+gameResults.classList.add('.gameResult');
+gameResults.innerHTML = "Click a button to begin playing.";
+container.appendChild(gameResults);
 
+function playRock() {
+    computerSelection = computerPlay();
+    playRound('rock', computerSelection);
+}
+
+function playPaper() {
+    computerSelection = computerPlay();
+    playRound('paper', computerSelection);
+}
+
+function playScissors() {
+    computerSelection = computerPlay();
+    playRound('scissors', computerSelection);
+}
+
+const rockBtn = document.querySelector('.rockButton');
+rockBtn.addEventListener('click', playRock);
+const paperBtn = document.querySelector('.paperButton');
+paperBtn.addEventListener('click', playPaper);
+const scissorsBtn = document.querySelector('.scissorsButton');
+scissorsBtn.addEventListener('click', playScissors);
 
 function computerPlay() {
     const choice = choices[Math.floor(Math.random()*choices.length)];
     return choice;
 };
 
+function initializeGame() {
+    playerScore = 0;
+    computerScore = 0;
+    gameRound = 1;
+};
+
 function playRound(playerSelection,computerSelection) {
+
+    if(gameRound == 1) {
+        initializeGame();
+    }
+
     switch(playerSelection) {
         case 'rock':
                 switch(computerSelection) {
@@ -76,16 +113,30 @@ function playRound(playerSelection,computerSelection) {
         default:
             return "Please enter a valid choice."
     }
-}
+
+    gameResults.innerHTML = `Round ${gameRound}: ${playerScore} to ${computerScore}`;
+
+    if(gameRound++ == 5) {
+        if (playerScore > computerScore) {
+            gameResults.innerHTML = `You won THE GAME!<br>The Final Score was ${playerScore} to ${computerScore}`;
+        } else if (computerScore > playerScore) {
+            gameResults.innerHTML = `You lost THE GAME!<br>The Final Score was ${playerScore} to ${computerScore}`;
+        } else {
+            gameResults.innerHTML = `THE GAME was inconclusive.<br>The Final Score was ${playerScore} to ${computerScore}`;
+        }
+        initializeGame();
+    }
+
+};
 
 function game(rounds) {
     playerScore = 0;
     computerScore = 0;
 
     for (i=0;i<rounds;i++){
-        console.log("Round " + (1+i))
+        // console.log("Round " + (1+i))
 
-        // let playerSelection = prompt("Make a choice between Rock, Paper, and Scissors", "Rock");
+        let playerSelection = prompt("Make a choice between Rock, Paper, and Scissors", "Rock");
         const computerSelection = computerPlay();
 
         if (playerSelection != null) {
@@ -111,10 +162,4 @@ function game(rounds) {
         return "THE GAME was inconclusive."
     }
 
-    // console.log("\nFinal Score");
-    // console.log("Player: " + playerScore);
-    // console.log("Computer: " + computerScore);
-
-}
-
-// game(1);
+};
